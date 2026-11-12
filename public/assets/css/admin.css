@@ -171,7 +171,7 @@ body {
     .sidebar-backdrop {
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, .5);
+        background: rgba(246, 243, 243, 0.854);
         z-index: 1050;
         opacity: 0;
         visibility: hidden;

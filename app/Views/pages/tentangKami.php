@@ -22,13 +22,7 @@
                         positif bagi masyarakat.
                     </p>
 
-                    <a href="<?= base_url('kegiatan') ?>" class="btn-orange">
-                        Temukan Kegiatan
-                        <i class="bi bi-arrow-up-right"></i>
-                    </a>
-
                     <div class="d-flex align-items-center gap-2 mt-4 pt-2">
-                        <i class="bi bi-heart-fill text-orange"></i>
                         <span class="text-secondary small">
                             Berawal dari kepedulian, tumbuh melalui kolaborasi.
                         </span>
@@ -62,8 +56,7 @@
     <section class="about-section">
         <div class="container">
 
-            <div class="text-center mb-5 reveal">
-                <span class="section-label">APA YANG KAMI PERCAYAI</span>
+            <div class="text-center mb-5">
 
                 <h2 class="section-title mt-3 mb-3">
                     Bertumbuh dengan Tujuan

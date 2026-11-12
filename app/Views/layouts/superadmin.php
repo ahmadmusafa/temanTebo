@@ -28,33 +28,45 @@
             Menu utama
         </div>
 
-        <a href="<?= site_url('superadmin') ?>"
-           class="admin-menu <?= uri_string() === 'superadmin' ? 'active' : '' ?>"
-           title="Dashboard">
+        <button type="button"
+                class="admin-menu w-100 border-0 bg-transparent text-start <?= uri_string() === 'superadmin' ? 'active' : '' ?>"
+                title="Dashboard"
+                onclick="window.location.href='<?= site_url('superadmin') ?>'">
             <i class="bi bi-grid-1x2-fill"></i>
             <span class="menu-text">Dashboard</span>
-        </a>
+        </button>
 
-        <a href="<?= site_url('superadmin/statistik') ?>"
-           class="admin-menu <?= str_starts_with(uri_string(), 'superadmin/statistik') ? 'active' : '' ?>"
-           title="Kelola Statistik">
+        <button type="button"
+                class="admin-menu w-100 border-0 bg-transparent text-start <?= str_starts_with(uri_string(), 'superadmin/statistik') ? 'active' : '' ?>"
+                title="Kelola Statistik"
+                onclick="window.location.href='<?= site_url('superadmin/statistik') ?>'">
             <i class="bi bi-bar-chart-fill"></i>
             <span class="menu-text">Kelola Statistik</span>
-        </a>
+        </button>
 
-        <a href="<?= site_url('superadmin/kegiatan') ?>"
-           class="admin-menu <?= str_starts_with(uri_string(), 'superadmin/kegiatan') ? 'active' : '' ?>"
-           title="Kelola Kegiatan">
+        <button type="button"
+                class="admin-menu w-100 border-0 bg-transparent text-start <?= str_starts_with(uri_string(), 'superadmin/kegiatan') ? 'active' : '' ?>"
+                title="Kelola Kegiatan"
+                onclick="window.location.href='<?= site_url('superadmin/kegiatan') ?>'">
             <i class="bi bi-calendar-event-fill"></i>
             <span class="menu-text">Kelola Kegiatan</span>
-        </a>
+        </button>
 
-        <a href="<?= site_url('superadmin/pendaftaran') ?>"
-           class="admin-menu <?= str_starts_with(uri_string(), 'superadmin/pendaftaran') ? 'active' : '' ?>"
-           title="Kelola Pendaftaran">
+        <button type="button"
+                class="admin-menu w-100 border-0 bg-transparent text-start <?= str_starts_with(uri_string(), 'superadmin/pendaftaran') ? 'active' : '' ?>"
+                title="Kelola Pendaftaran"
+                onclick="window.location.href='<?= site_url('superadmin/pendaftaran') ?>'">
             <i class="bi bi-clipboard-check-fill"></i>
             <span class="menu-text">Kelola Pendaftaran</span>
-        </a>
+        </button>
+
+        <button type="button"
+                class="admin-menu w-100 border-0 bg-transparent text-start <?= str_starts_with(uri_string(), 'superadmin/kritiksaran') ? 'active' : '' ?>"
+                title="Kritik & Saran"
+                onclick="window.location.href='<?= site_url('superadmin/kritiksaran') ?>'">
+            <i class="bi bi-chat-square-heart-fill"></i>
+            <span class="menu-text">Kritik &amp; Saran</span>
+        </button>
 
         <hr class="border-secondary my-4">
 
@@ -62,14 +74,19 @@
             Lainnya
         </div>
 
-        <a href="<?= site_url('/') ?>" class="admin-menu" title="Lihat Website">
+        <button type="button"
+                class="admin-menu w-100 border-0 bg-transparent text-start"
+                title="Lihat Website"
+                onclick="window.location.href='<?= site_url('/') ?>'">
             <i class="bi bi-globe"></i>
             <span class="menu-text">Lihat Website</span>
-        </a>
+        </button>
 
         <form action="<?= url_to('logout') ?>" method="post">
             <?= csrf_field() ?>
-            <button type="submit" class="admin-menu w-100 border-0 bg-transparent text-start" title="Keluar">
+            <button type="submit"
+                    class="admin-menu w-100 border-0 bg-transparent text-start"
+                    title="Keluar">
                 <i class="bi bi-box-arrow-left"></i>
                 <span class="menu-text">Keluar</span>
             </button>

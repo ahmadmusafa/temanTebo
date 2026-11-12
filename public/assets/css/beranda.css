@@ -1,5 +1,6 @@
 
 /* ================= HERO SLIDESHOW ================= */
+
 .hero-slider {
     position: relative;
     min-height: 650px;
@@ -9,7 +10,6 @@
     background: #262626;
 }
 
-/* FOTO BACKGROUND */
 .hero-slide {
     position: absolute;
     inset: 0;
@@ -21,12 +21,10 @@
     transition: opacity 1s ease-in-out;
 }
 
-/* FOTO AKTIF */
 .hero-slide.active {
     opacity: 1;
 }
 
-/* OVERLAY FOTO */
 .hero-slide::before {
     content: "";
     position: absolute;
@@ -40,7 +38,6 @@
     pointer-events: none;
 }
 
-/* KONTEN HERO */
 .hero-content {
     position: relative;
     z-index: 1;
@@ -71,7 +68,9 @@
     line-height: 1.8;
 }
 
-/* TOMBOL AKSI */
+
+/* ================= TOMBOL AKSI ================= */
+
 .btn-aksi {
     display: inline-flex;
     align-items: center;
@@ -91,7 +90,9 @@
     transform: translateY(-2px);
 }
 
+
 /* ================= STATISTIK ================= */
+
 .statistik-section {
     position: relative;
     z-index: 5;
@@ -147,98 +148,9 @@
     font-size: 1.1rem;
 }
 
-/* ================= TABLET ================= */
-@media (max-width: 767.98px) {
-    .hero-slider {
-        min-height: 600px;
-    }
-
-    .hero-slide {
-        background-position: center;
-    }
-
-    .hero-slide::before {
-        background: rgba(0, 0, 0, 0.4);
-    }
-
-    .hero-content {
-        padding-top: 60px;
-        padding-bottom: 80px;
-    }
-
-    .hero-title {
-        font-size: clamp(2rem, 8vw, 3rem);
-        letter-spacing: -0.5px;
-    }
-
-    .hero-description {
-        font-size: 1rem;
-    }
-
-    .statistik-section {
-        margin-top: -35px;
-        padding-bottom: 30px;
-    }
-
-    .statistik-card {
-        gap: 20px 10px;
-        padding: 22px 12px;
-    }
-
-    .statistik-item {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
-    }
-
-    .statistik-icon {
-        font-size: 42px;
-    }
-
-    .statistik-info h3 {
-        justify-content: center;
-        font-size: 1.6rem;
-    }
-
-    .statistik-info p {
-        font-size: .9rem;
-    }
-}
-
-/* ================= HP KECIL ================= */
-@media (max-width: 400px) {
-    .hero-slider {
-        min-height: 500px;
-    }
-
-    .statistik-section {
-        margin-top: -25px;
-    }
-
-    .statistik-card {
-        gap: 8px;
-        padding: 18px 6px;
-        border-radius: 14px;
-    }
-
-    .statistik-item {
-        gap: 7px;
-    }
-
-    .statistik-icon {
-        font-size: 32px;
-    }
-
-    .statistik-info h3 {
-        font-size: 1.2rem;
-    }
-
-    .statistik-info p {
-        font-size: .72rem;
-    }
-}
 
 /* ================= EVENT SECTION ================= */
+
 .event-section {
     background:
         radial-gradient(
@@ -246,7 +158,7 @@
             rgba(249, 115, 22, 0.06),
             transparent 45%
         ),
-        #ffffff;
+        #fff;
 }
 
 .event-label {
@@ -258,24 +170,31 @@
 }
 
 .event-heading {
+    color: #262626;
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 800;
-    color: #262626;
 }
 
 .event-heading span {
     color: #f97316;
 }
 
+.event-all-button {
+    border: 1px solid #f97316;
+    color: #f97316;
+}
+
+
 /* KARTU EVENT */
+
 .event-card {
     overflow: hidden;
+    height: 100%;
     background: #fff;
     border: 1px solid #f0f0f0;
     border-radius: 18px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
-    transition: transform 0.25s ease,
-                box-shadow 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .event-card:hover {
@@ -346,6 +265,10 @@
     line-height: 1.7;
 }
 
+.event-price {
+    color: #f97316;
+}
+
 .btn-event-detail {
     padding: 11px 16px;
     border: 1px solid #f97316;
@@ -360,7 +283,9 @@
     color: #fff;
 }
 
-/* MODAL EVENT */
+
+/* ================= MODAL EVENT ================= */
+
 .event-modal-content {
     overflow: hidden;
     border: none;
@@ -404,30 +329,53 @@
     color: #f97316;
 }
 
-@media (max-width: 576px) {
-    .event-card-body {
-        padding: 18px;
-    }
-
-    .event-image-wrapper {
-        height: 210px;
-    }
-
-    .event-modal-image {
-        height: 210px;
-    }
-
-    .event-modal-title {
-        font-size: 1.5rem;
-    }
-
-    .event-modal-meta {
-        flex-direction: column;
-        gap: 10px;
-    }
+.event-modal-description {
+    line-height: 1.8;
 }
 
+
+/* ================= KRITIK DAN SARAN ================= */
+
+.feedback-section {
+    background: #fff7ed;
+}
+
+.feedback-card {
+    position: relative;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+}
+
+.feedback-card .form-label {
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.feedback-card .form-control,
+.feedback-card .form-select {
+    padding: .75rem 1rem;
+    border-radius: 12px;
+}
+
+.feedback-card .form-control:focus,
+.feedback-card .form-select:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 .2rem rgba(249, 115, 22, .15);
+}
+
+/* Honeypot anti-spam */
+.feedback-hp {
+    position: absolute;
+    left: -9999px;
+    height: 0;
+    overflow: hidden;
+}
+
+
 /* ================= OUR PARTNERS ================= */
+
 .partners-section {
     overflow: hidden;
     background: #fff;
@@ -444,10 +392,11 @@
 }
 
 .partners-marquee {
+    position: relative;
     width: 100%;
     overflow: hidden;
-    position: relative;
     padding: 20px 0;
+
     -webkit-mask-image: linear-gradient(
         to right,
         transparent,
@@ -455,6 +404,7 @@
         #000 94%,
         transparent
     );
+
     mask-image: linear-gradient(
         to right,
         transparent,
@@ -475,16 +425,15 @@
     animation-play-state: paused;
 }
 
-/* KARTU LOGO */
 .partner-logo {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
     width: 220px;
     height: 130px;
     margin: 0 20px;
     padding: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
     border: 1px solid #f1f1f1;
     border-radius: 18px;
     background: #fff;
@@ -499,7 +448,6 @@
     box-shadow: 0 10px 25px rgba(249, 115, 22, 0.1);
 }
 
-/* LOGO BERWARNA ASLI DAN LEBIH BESAR */
 .partner-logo img {
     display: block;
     width: 100%;
@@ -516,7 +464,9 @@
     transform: scale(1.08);
 }
 
-/* ANIMASI BERJALAN */
+
+/* ================= ANIMASI ================= */
+
 @keyframes partners-scroll {
     from {
         transform: translateX(0);
@@ -527,8 +477,94 @@
     }
 }
 
-/* RESPONSIVE */
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 767.98px) {
+
+    .hero-slider {
+        min-height: 600px;
+    }
+
+    .hero-slide {
+        background-position: center;
+    }
+
+    .hero-slide::before {
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content {
+        padding-top: 60px;
+        padding-bottom: 80px;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+        letter-spacing: -0.5px;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .statistik-section {
+        margin-top: -35px;
+        padding-bottom: 30px;
+    }
+
+    .statistik-card {
+        gap: 20px 10px;
+        padding: 22px 12px;
+    }
+
+    .statistik-item {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .statistik-icon {
+        font-size: 42px;
+    }
+
+    .statistik-info h3 {
+        justify-content: center;
+        font-size: 1.6rem;
+    }
+
+    .statistik-info p {
+        font-size: .9rem;
+    }
+}
+
 @media (max-width: 576px) {
+
+    .event-card-body {
+        padding: 18px;
+    }
+
+    .event-image-wrapper {
+        height: 210px;
+    }
+
+    .event-modal-image {
+        height: 210px;
+    }
+
+    .event-modal-title {
+        font-size: 1.5rem;
+    }
+
+    .event-modal-meta {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .feedback-card {
+        padding: 1.25rem;
+    }
+
     .partner-logo {
         width: 175px;
         height: 110px;
@@ -546,7 +582,44 @@
     }
 }
 
+@media (max-width: 400px) {
+
+    .hero-slider {
+        min-height: 500px;
+    }
+
+    .statistik-section {
+        margin-top: -25px;
+    }
+
+    .statistik-card {
+        gap: 8px;
+        padding: 18px 6px;
+        border-radius: 14px;
+    }
+
+    .statistik-item {
+        gap: 7px;
+    }
+
+    .statistik-icon {
+        font-size: 32px;
+    }
+
+    .statistik-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .statistik-info p {
+        font-size: .72rem;
+    }
+}
+
+
+/* ================= AKSESIBILITAS ================= */
+
 @media (prefers-reduced-motion: reduce) {
+
     .partners-track {
         animation: none;
     }

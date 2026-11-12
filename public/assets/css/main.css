@@ -1,0 +1,290 @@
+
+:root {
+    --primary: #f97316;
+    --primary-dark: #ea580c;
+    --dark: #171717;
+    --light: #fff7ed;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: var(--dark);
+    background: #fff;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid #f1f1f1;
+    backdrop-filter: blur(12px);
+}
+
+.navbar-container {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.navbar-brand {
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.navbar-logo {
+    display: block;
+    width: auto;
+    height: 55px;
+    max-width: min(65vw, 300px);
+    object-fit: contain;
+}
+
+.navbar-toggler {
+    margin-left: auto;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 7px 10px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    color: #525252;
+    font-weight: 600;
+    padding: 10px 12px;
+    transition: color 0.2s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--primary);
+}
+
+/* Tanda menu aktif */
+.navbar-nav .nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 12px;
+    right: 12px;
+    height: 3px;
+    background-color: var(--primary);
+    border-radius: 5px;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ================= BUTTON ================= */
+
+.btn-aksi {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    border: 0;
+    border-radius: 10px;
+    padding: 11px 18px;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+}
+
+.btn-aksi:hover,
+.btn-aksi:focus {
+    background: var(--primary-dark);
+    color: #fff;
+}
+
+/* ================= MAIN ================= */
+
+main {
+    min-height: 70vh;
+    min-width: 0;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    background: var(--dark);
+    color: #d4d4d4;
+    padding: 48px 0 20px;
+}
+
+.footer .footer-brand {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.footer a {
+    color: #d4d4d4;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    color: #fb923c;
+}
+
+.footer-description {
+    max-width: 390px;
+    line-height: 1.8;
+}
+
+.footer-divider {
+    border-color: #404040;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 8px;
+    font-size: 0.875rem;
+}
+
+/* ================= DESKTOP ================= */
+
+@media (min-width: 992px) {
+    .navbar-container {
+        flex-wrap: nowrap;
+        gap: 20px;
+    }
+
+    .navbar-collapse {
+        flex: 1;
+        align-items: center;
+        justify-content: space-between;
+        min-width: 0;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+    }
+
+    .navbar-nav .nav-link {
+        padding-left: 9px;
+        padding-right: 9px;
+        white-space: nowrap;
+    }
+
+    .navbar-actions .btn {
+        white-space: nowrap;
+    }
+}
+
+/* ================= TABLET DAN HP ================= */
+
+@media (max-width: 991.98px) {
+    .navbar-container {
+        min-height: 68px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .navbar-logo {
+        height: 45px;
+    }
+
+    .navbar-collapse {
+        flex-basis: 100%;
+        width: 100%;
+        padding-top: 12px;
+    }
+
+    .navbar-nav {
+        margin-top: 0;
+        margin-bottom: 12px;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 10px 4px;
+    }
+
+    .navbar-nav .nav-link.active::after {
+        left: 4px;
+        right: auto;
+        width: 35px;
+    }
+
+    .navbar-actions {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        padding-bottom: 8px;
+    }
+
+    .navbar-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer {
+        padding-top: 36px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* ================= HP KECIL ================= */
+
+@media (max-width: 575.98px) {
+    .navbar-container {
+        min-height: 60px;
+    }
+
+    .navbar-logo {
+        height: 40px;
+        max-width: min(70vw, 260px);
+    }
+
+    .footer {
+        padding-top: 30px;
+    }
+
+    .footer .footer-brand {
+        font-size: 1.35rem;
+    }
+
+    .footer-bottom {
+        font-size: 0.8rem;
+        overflow-wrap: anywhere;
+    }
+}
+
+/* ================= AKSESIBILITAS ================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

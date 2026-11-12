@@ -1,82 +1,22 @@
+
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('styles') ?>
-<link rel="stylesheet" href="<?= base_url('assets/css/home.css') ?>">
-
-<style>
-    /* ===== Kritik & Saran ===== */
-    .feedback-section {
-        background: #fff7ed;
-    }
-
-    .feedback-card {
-        position: relative;
-        background: #fff;
-        border-radius: 20px;
-        padding: 2rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
-    }
-
-    .feedback-card .form-label {
-        font-weight: 600;
-        font-size: .9rem;
-    }
-
-    .feedback-card .form-control,
-    .feedback-card .form-select {
-        border-radius: 12px;
-        padding: .75rem 1rem;
-    }
-
-    .feedback-card .form-control:focus,
-    .feedback-card .form-select:focus {
-        border-color: #f97316;
-        box-shadow: 0 0 0 .2rem rgba(249, 115, 22, .15);
-    }
-
-    /* Honeypot: disembunyikan dari pengguna, hanya terisi oleh bot */
-    .feedback-hp {
-        position: absolute;
-        left: -9999px;
-        height: 0;
-        overflow: hidden;
-    }
-
-    @media (max-width: 575.98px) {
-        .feedback-card {
-            padding: 1.25rem;
-        }
-    }
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/beranda.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
-<!-- ================= HERO SLIDESHOW ================= -->
+<!-- HERO SLIDESHOW -->
 <section class="hero-slider" id="heroSlider">
 
-    <div class="hero-slide active"
-         style="background-image: url('<?= base_url('assets/img/kegiatan1.JPG') ?>');">
-    </div>
-
-    <div class="hero-slide"
-         style="background-image: url('<?= base_url('assets/img/kegiatan2.JPG') ?>');">
-    </div>
-
-    <div class="hero-slide"
-         style="background-image: url('<?= base_url('assets/img/kegiatan3.JPG') ?>');">
-    </div>
-
-    <div class="hero-slide"
-         style="background-image: url('<?= base_url('assets/img/kegiatan4.JPG') ?>');">
-    </div>
-
-    <div class="hero-slide"
-         style="background-image: url('<?= base_url('assets/img/kegiatan5.JPG') ?>');">
-    </div>
+    <div class="hero-slide active" style="background-image: url('<?= base_url('assets/img/kegiatan1.JPG') ?>');"></div>
+    <div class="hero-slide" style="background-image: url('<?= base_url('assets/img/kegiatan2.JPG') ?>');"></div>
+    <div class="hero-slide" style="background-image: url('<?= base_url('assets/img/kegiatan3.JPG') ?>');"></div>
+    <div class="hero-slide" style="background-image: url('<?= base_url('assets/img/kegiatan4.JPG') ?>');"></div>
+    <div class="hero-slide" style="background-image: url('<?= base_url('assets/img/kegiatan5.JPG') ?>');"></div>
 
     <div class="container hero-content">
-
         <h1 class="hero-title">
             Anak Muda Bergerak,
             <span>Berdaya Berdampak.</span>
@@ -93,17 +33,15 @@
                 <i class="bi bi-arrow-right ms-2"></i>
             </a>
         </div>
-
     </div>
 </section>
 
 
-<!-- ================= STATISTIK ================= -->
+<!-- STATISTIK -->
 <section class="statistik-section">
     <div class="container">
         <div class="statistik-card">
 
-            <!-- Relawan -->
             <div class="statistik-item">
                 <div class="statistik-icon">
                     <i class="bi bi-people"></i>
@@ -111,15 +49,13 @@
 
                 <div class="statistik-info">
                     <h3>
-                        <span class="counter"
-                              data-target="<?= esc($statistik['relawan'] ?? 0) ?>">0</span>
+                        <span class="counter" data-target="<?= esc($statistik['relawan'] ?? 0) ?>">0</span>
                         <span class="statistik-plus">+</span>
                     </h3>
                     <p>Relawan</p>
                 </div>
             </div>
 
-            <!-- Organisasi -->
             <div class="statistik-item">
                 <div class="statistik-icon">
                     <i class="bi bi-building"></i>
@@ -127,15 +63,13 @@
 
                 <div class="statistik-info">
                     <h3>
-                        <span class="counter"
-                              data-target="<?= esc($statistik['organisasi'] ?? 0) ?>">0</span>
+                        <span class="counter" data-target="<?= esc($statistik['organisasi'] ?? 0) ?>">0</span>
                         <span class="statistik-plus">+</span>
                     </h3>
                     <p>Organisasi</p>
                 </div>
             </div>
 
-            <!-- Aktivitas Sosial -->
             <div class="statistik-item">
                 <div class="statistik-icon">
                     <i class="bi bi-heart-pulse"></i>
@@ -143,8 +77,7 @@
 
                 <div class="statistik-info">
                     <h3>
-                        <span class="counter"
-                              data-target="<?= esc($statistik['aktivitas_sosial'] ?? 0) ?>">0</span>
+                        <span class="counter" data-target="<?= esc($statistik['aktivitas_sosial'] ?? 0) ?>">0</span>
                         <span class="statistik-plus">+</span>
                     </h3>
                     <p>Aktivitas Sosial</p>
@@ -156,14 +89,11 @@
 </section>
 
 
-<!-- ================= EVENT TERBARU ================= -->
+<!-- EVENT TERBARU -->
 <section class="event-section py-5" id="event">
     <div class="container py-3">
 
-        <!-- Heading -->
-        <div class="d-flex flex-wrap justify-content-between
-                    align-items-end gap-3 mb-4">
-
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
             <div>
                 <h2 class="event-heading mt-2">
                     Temukan Kegiatan <span>Inspiratif</span>
@@ -175,15 +105,12 @@
             </div>
 
             <a href="<?= base_url('kegiatan') ?>"
-               class="btn rounded-pill px-4"
-               style="border: 1px solid #f97316; color: #f97316;">
+               class="btn rounded-pill px-4 event-all-button">
                 Semua Event
                 <i class="bi bi-arrow-up-right ms-1"></i>
             </a>
-
         </div>
 
-        <!-- Daftar Kegiatan dari Database (maksimal 3) -->
         <div class="row g-4">
 
             <?php if (!empty($kegiatan)): ?>
@@ -220,7 +147,6 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="event-card h-100">
 
-                            <!-- Gambar Kegiatan -->
                             <div class="event-image-wrapper">
 
                                 <?php if ($gambar): ?>
@@ -229,8 +155,7 @@
                                         class="event-image"
                                         alt="<?= esc($event['judul']) ?>">
                                 <?php else: ?>
-                                    <div class="d-flex align-items-center
-                                                justify-content-center h-100">
+                                    <div class="d-flex align-items-center justify-content-center h-100">
                                         <i class="bi bi-image fs-1 text-secondary"></i>
                                     </div>
                                 <?php endif; ?>
@@ -241,7 +166,6 @@
 
                             </div>
 
-                            <!-- Informasi Kegiatan -->
                             <div class="event-card-body">
 
                                 <div class="event-date">
@@ -272,23 +196,18 @@
                                     <?php endif; ?>
                                 </div>
 
-                                <!-- Harga dan Status -->
-                                <div class="d-flex justify-content-between
-                                            align-items-center flex-wrap gap-2">
+                                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
 
-                                    <strong style="color: #f97316;">
+                                    <strong class="event-price">
                                         <?= esc($biaya) ?>
                                     </strong>
 
-                                    <span class="badge <?= $statusDibuka
-                                        ? 'bg-success'
-                                        : 'bg-secondary' ?>">
-                                        <?= $statusDibuka ? 'Available' : 'Ditutup' ?>
+                                    <span class="badge <?= $statusDibuka ? 'bg-success' : 'bg-secondary' ?>">
+                                        <?= $statusDibuka ? 'Tersedia' : 'Di Tutup' ?>
                                     </span>
 
                                 </div>
 
-                                <!-- Detail Kegiatan -->
                                 <button
                                     type="button"
                                     class="btn btn-event-detail w-100 mt-3"
@@ -303,7 +222,6 @@
 
                                     Lihat Detail Event
                                     <i class="bi bi-arrow-right ms-2"></i>
-
                                 </button>
 
                             </div>
@@ -314,20 +232,15 @@
 
             <?php else: ?>
 
-                <!-- Jika Belum Ada Kegiatan -->
                 <div class="col-12">
                     <div class="text-center py-5">
-
                         <i class="bi bi-calendar-x fs-1 text-secondary"></i>
 
-                        <h5 class="mt-3">
-                            Belum Ada Kegiatan
-                        </h5>
+                        <h5 class="mt-3">Belum Ada Kegiatan</h5>
 
                         <p class="text-secondary mb-0">
                             Saat ini belum ada kegiatan yang tersedia.
                         </p>
-
                     </div>
                 </div>
 
@@ -338,7 +251,7 @@
 </section>
 
 
-<!-- ================= MODAL DETAIL EVENT ================= -->
+<!-- MODAL DETAIL EVENT -->
 <div class="modal fade"
      id="modalEvent"
      tabindex="-1"
@@ -349,7 +262,6 @@
         <div class="modal-content event-modal-content">
 
             <div class="modal-header border-0 pb-0">
-
                 <span class="event-label">
                     <i class="bi bi-calendar-heart me-1"></i>
                     DETAIL EVENT
@@ -359,7 +271,6 @@
                         class="btn-close"
                         data-bs-dismiss="modal"
                         aria-label="Tutup"></button>
-
             </div>
 
             <div class="modal-body p-4 pt-3">
@@ -369,14 +280,11 @@
                      class="event-modal-image mb-4"
                      alt="Foto event">
 
-                <span id="detailEventCategory"
-                      class="event-category-modal"></span>
+                <span id="detailEventCategory" class="event-category-modal"></span>
 
-                <h3 id="modalEventLabel"
-                    class="event-modal-title mt-3"></h3>
+                <h3 id="modalEventLabel" class="event-modal-title mt-3"></h3>
 
                 <div class="event-modal-meta mt-3">
-
                     <div>
                         <i class="bi bi-calendar-event"></i>
                         <span id="detailEventDate"></span>
@@ -386,21 +294,17 @@
                         <i class="bi bi-geo-alt"></i>
                         <span id="detailEventLocation"></span>
                     </div>
-
                 </div>
 
                 <hr class="my-4">
 
                 <h6 class="fw-bold">Tentang Event</h6>
 
-                <p id="detailEventDescription"
-                   class="text-secondary"
-                   style="line-height: 1.8;"></p>
+                <p id="detailEventDescription" class="text-secondary event-modal-description"></p>
 
             </div>
 
             <div class="modal-footer border-0 px-4 pb-4">
-
                 <button type="button"
                         class="btn btn-light rounded-pill px-4"
                         data-bs-dismiss="modal">
@@ -412,7 +316,6 @@
                     Jelajahi Kegiatan
                     <i class="bi bi-arrow-right ms-2"></i>
                 </a>
-
             </div>
 
         </div>
@@ -420,23 +323,19 @@
 </div>
 
 
-<!-- ================= KRITIK & SARAN ================= -->
+<!-- KRITIK DAN SARAN -->
 <?php
-    $errorsKritik  = session()->getFlashdata('errors_kritik') ?? [];
-    $sukses        = session()->getFlashdata('kritik_sukses');
-    $gagal         = session()->getFlashdata('kritik_gagal');
+    $errorsKritik = session()->getFlashdata('errors_kritik') ?? [];
+    $sukses = session()->getFlashdata('kritik_sukses');
+    $gagal = session()->getFlashdata('kritik_gagal');
 ?>
-<section class="feedback-section py-5" id="kritik-saran">
+
+<section class="feedback-section py-5" id="kritiksaran">
     <div class="container py-3">
         <div class="row justify-content-center">
             <div class="col-lg-8">
 
-                <!-- Heading -->
                 <div class="text-center mb-4">
-                    <span class="event-label">
-                        Suara Anda Berarti
-                    </span>
-
                     <h2 class="event-heading mt-2">
                         Kritik <span>& Saran</span>
                     </h2>
@@ -447,7 +346,6 @@
                     </p>
                 </div>
 
-                <!-- Pesan Sukses / Gagal -->
                 <?php if ($sukses): ?>
                     <div class="alert alert-success d-flex align-items-center rounded-4" role="alert">
                         <i class="bi bi-check-circle-fill me-2"></i>
@@ -462,15 +360,13 @@
                     </div>
                 <?php endif; ?>
 
-                <!-- Form -->
-                <form action="<?= base_url('kritik-saran/kirim') ?>"
+                <form action="<?= base_url('kritiksaran/kirim') ?>"
                       method="post"
                       class="feedback-card"
                       novalidate>
 
                     <?= csrf_field() ?>
 
-                    <!-- Honeypot anti-spam (jangan diisi) -->
                     <div class="feedback-hp" aria-hidden="true">
                         <label for="website">Website</label>
                         <input type="text"
@@ -486,6 +382,7 @@
                             <label for="kritikNama" class="form-label">
                                 Nama <span class="text-danger">*</span>
                             </label>
+
                             <input type="text"
                                    id="kritikNama"
                                    name="nama"
@@ -494,8 +391,11 @@
                                    placeholder="Nama lengkap Anda"
                                    value="<?= esc(old('nama')) ?>"
                                    required>
+
                             <?php if (isset($errorsKritik['nama'])): ?>
-                                <div class="invalid-feedback"><?= esc($errorsKritik['nama']) ?></div>
+                                <div class="invalid-feedback">
+                                    <?= esc($errorsKritik['nama']) ?>
+                                </div>
                             <?php endif; ?>
                         </div>
 
@@ -503,6 +403,7 @@
                             <label for="kritikEmail" class="form-label">
                                 Email <span class="text-secondary fw-normal">(opsional)</span>
                             </label>
+
                             <input type="email"
                                    id="kritikEmail"
                                    name="email"
@@ -510,8 +411,11 @@
                                    class="form-control <?= isset($errorsKritik['email']) ? 'is-invalid' : '' ?>"
                                    placeholder="nama@email.com"
                                    value="<?= esc(old('email')) ?>">
+
                             <?php if (isset($errorsKritik['email'])): ?>
-                                <div class="invalid-feedback"><?= esc($errorsKritik['email']) ?></div>
+                                <div class="invalid-feedback">
+                                    <?= esc($errorsKritik['email']) ?>
+                                </div>
                             <?php endif; ?>
                         </div>
 
@@ -519,15 +423,23 @@
                             <label for="kritikJenis" class="form-label">
                                 Jenis Masukan <span class="text-danger">*</span>
                             </label>
+
                             <select id="kritikJenis"
                                     name="jenis"
                                     class="form-select <?= isset($errorsKritik['jenis']) ? 'is-invalid' : '' ?>"
                                     required>
-                                <option value="saran" <?= old('jenis') !== 'kritik' ? 'selected' : '' ?>>Saran</option>
-                                <option value="kritik" <?= old('jenis') === 'kritik' ? 'selected' : '' ?>>Kritik</option>
+                                <option value="saran" <?= old('jenis') !== 'kritik' ? 'selected' : '' ?>>
+                                    Saran
+                                </option>
+                                <option value="kritik" <?= old('jenis') === 'kritik' ? 'selected' : '' ?>>
+                                    Kritik
+                                </option>
                             </select>
+
                             <?php if (isset($errorsKritik['jenis'])): ?>
-                                <div class="invalid-feedback"><?= esc($errorsKritik['jenis']) ?></div>
+                                <div class="invalid-feedback">
+                                    <?= esc($errorsKritik['jenis']) ?>
+                                </div>
                             <?php endif; ?>
                         </div>
 
@@ -535,6 +447,7 @@
                             <label for="kritikPesan" class="form-label">
                                 Pesan <span class="text-danger">*</span>
                             </label>
+
                             <textarea id="kritikPesan"
                                       name="pesan"
                                       rows="5"
@@ -542,8 +455,11 @@
                                       class="form-control <?= isset($errorsKritik['pesan']) ? 'is-invalid' : '' ?>"
                                       placeholder="Tulis kritik atau saran Anda di sini..."
                                       required><?= esc(old('pesan')) ?></textarea>
+
                             <?php if (isset($errorsKritik['pesan'])): ?>
-                                <div class="invalid-feedback"><?= esc($errorsKritik['pesan']) ?></div>
+                                <div class="invalid-feedback">
+                                    <?= esc($errorsKritik['pesan']) ?>
+                                </div>
                             <?php endif; ?>
                         </div>
 
@@ -564,7 +480,7 @@
 </section>
 
 
-<!-- ================= OUR PARTNERS ================= -->
+<!-- OUR PARTNERS -->
 <section class="partners-section py-5">
     <div class="container text-center py-3">
 
@@ -581,35 +497,28 @@
     <div class="partners-marquee">
         <div class="partners-track">
 
-            <!-- Logo Mitra -->
             <div class="partner-logo">
-                <img src="<?= base_url('assets/img/partners/zzcode.jpeg') ?>"
-                     alt="zZcode">
+                <img src="<?= base_url('assets/img/partners/zzcode.jpeg') ?>" alt="zZcode">
             </div>
 
             <div class="partner-logo">
-                <img src="<?= base_url('assets/img/partners/amalbaik.jpeg') ?>"
-                     alt="Amal Baik">
+                <img src="<?= base_url('assets/img/partners/amalbaik.jpeg') ?>" alt="Amal Baik">
             </div>
 
             <div class="partner-logo">
-                <img src="<?= base_url('assets/img/partners/swaka1.PNG') ?>"
-                     alt="Swaka">
+                <img src="<?= base_url('assets/img/partners/swaka1.PNG') ?>" alt="Swaka">
             </div>
 
             <div class="partner-logo">
-                <img src="<?= base_url('assets/img/partners/swaka2.PNG') ?>"
-                     alt="Swaka">
+                <img src="<?= base_url('assets/img/partners/swaka2.PNG') ?>" alt="Swaka">
             </div>
 
             <div class="partner-logo">
-                <img src="<?= base_url('assets/img/partners/dispusip.PNG') ?>"
-                     alt="Dispusip">
+                <img src="<?= base_url('assets/img/partners/dispusip.PNG') ?>" alt="Dispusip">
             </div>
 
             <div class="partner-logo">
-                <img src="<?= base_url('assets/img/partners/mainyuk.jpeg') ?>"
-                     alt="Main Yuk">
+                <img src="<?= base_url('assets/img/partners/mainyuk.jpeg') ?>" alt="Main Yuk">
             </div>
 
             <!-- Duplikat untuk animasi -->
@@ -648,30 +557,31 @@
 <script src="<?= base_url('assets/js/beranda.js') ?>"></script>
 
 <script>
-    // Isi modal "Detail Event" dari atribut data-* tombol yang diklik
     document.addEventListener('DOMContentLoaded', function () {
         var modalEl = document.getElementById('modalEvent');
+
         if (!modalEl) return;
 
         modalEl.addEventListener('show.bs.modal', function (e) {
             var btn = e.relatedTarget;
+
             if (!btn) return;
 
-            var d   = btn.dataset;
+            var d = btn.dataset;
             var img = document.getElementById('detailEventImage');
             var desc = document.getElementById('detailEventDescription');
 
-            document.getElementById('modalEventLabel').textContent       = d.title || '';
-            document.getElementById('detailEventCategory').textContent   = d.category || '';
-            document.getElementById('detailEventDate').textContent       = d.date || '-';
-            document.getElementById('detailEventLocation').textContent   = d.location || '-';
+            document.getElementById('modalEventLabel').textContent = d.title || '';
+            document.getElementById('detailEventCategory').textContent = d.category || '';
+            document.getElementById('detailEventDate').textContent = d.date || '-';
+            document.getElementById('detailEventLocation').textContent = d.location || '-';
 
-            desc.textContent       = d.description || 'Belum ada deskripsi.';
-            desc.style.whiteSpace  = 'pre-line';
+            desc.textContent = d.description || 'Belum ada deskripsi.';
+            desc.style.whiteSpace = 'pre-line';
 
             if (d.image) {
-                img.src           = d.image;
-                img.alt           = d.title || 'Foto event';
+                img.src = d.image;
+                img.alt = d.title || 'Foto event';
                 img.style.display = '';
             } else {
                 img.removeAttribute('src');

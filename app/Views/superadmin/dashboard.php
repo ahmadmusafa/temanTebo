@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-6 col-xl-4" id="kritik-saran">
+        <div class="col-12 col-md-6 col-xl-4" id="kritiksaran">
             <div class="card stat-card h-100">
                 <div class="card-body p-4">
                     <div class="stat-icon mb-3">
