@@ -10,8 +10,10 @@ class KritikSaran extends BaseController
     {
         // Honeypot anti-bot
         if ((string) $this->request->getPost('website') !== '') {
-            return redirect()->to(site_url('/#kritik-saran'))
-                ->with('kritik_sukses', 'Terima kasih!');
+            return $this->response->setJSON([
+                'status'  => 'success',
+                'message' => 'Terima kasih! Kritik/saran Anda sudah terkirim.',
+            ]);
         }
 
         $data = [
@@ -24,13 +26,18 @@ class KritikSaran extends BaseController
         $model = new KritikSaranModel();
 
         if (! $model->insert($data)) {
-            return redirect()->to(site_url('/#kritik-saran'))
-                ->withInput()
-                ->with('errors_kritik', $model->errors())
-                ->with('kritik_gagal', 'Mohon periksa kembali isian Anda.');
+            return $this->response
+                ->setStatusCode(422)
+                ->setJSON([
+                    'status'  => 'error',
+                    'message' => 'Mohon periksa kembali isian Anda.',
+                    'errors'  => $model->errors(),
+                ]);
         }
 
-        return redirect()->to(site_url('/#kritik-saran'))
-            ->with('kritik_sukses', 'Terima kasih! Kritik/saran Anda sudah terkirim.');
+        return $this->response->setJSON([
+            'status'  => 'success',
+            'message' => 'Terima kasih! Kritik/saran Anda sudah terkirim.',
+        ]);
     }
 }

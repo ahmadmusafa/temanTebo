@@ -22,8 +22,6 @@ class CreatePendaftaran extends Migration
                 'type'     => 'INT',
                 'unsigned' => true,
             ],
-
-            // Biodata peserta
             'nama_lengkap' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 150,
@@ -41,20 +39,9 @@ class CreatePendaftaran extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => 20,
             ],
-            'instagram' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 100,
-                'null'       => true,
-            ],
-            'instansi' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 150,
-                'null'       => true,
-            ],
             'jenis_kelamin' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 20,
-                'null'       => true,
+                'type'       => 'ENUM',
+                'constraint' => ['Laki-laki', 'Perempuan'],
             ],
             'tanggal_lahir' => [
                 'type' => 'DATE',
@@ -65,22 +52,11 @@ class CreatePendaftaran extends Migration
                 'constraint' => 150,
                 'null'       => true,
             ],
-            'riwayat_penyakit' => [
-                'type' => 'TEXT',
-                'null' => true,
+            'instansi' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 150,
+                'null'       => true,
             ],
-
-            // Persyaratan tambahan per kegiatan
-            'data_persyaratan' => [
-                'type' => 'TEXT',
-                'null' => true,
-            ],
-            'berkas_persyaratan' => [
-                'type' => 'TEXT',
-                'null' => true,
-            ],
-
-            // Pembayaran
             'jumlah_pembayaran' => [
                 'type'       => 'DECIMAL',
                 'constraint' => '12,2',
@@ -95,10 +71,8 @@ class CreatePendaftaran extends Migration
             'status_pembayaran' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 30,
-                'default'    => 'tidak_ada',
+                'default'    => 'menunggu_verifikasi',
             ],
-
-            // Status pendaftaran
             'status_pendaftaran' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 30,
@@ -108,7 +82,6 @@ class CreatePendaftaran extends Migration
                 'type' => 'TEXT',
                 'null' => true,
             ],
-
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,

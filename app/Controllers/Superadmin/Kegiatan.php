@@ -25,15 +25,24 @@ class Kegiatan extends BaseController
 
     public function index()
     {
-        return view('superadmin/kegiatan/index', ['kegiatan' => $this->service->semua()]);
+        return view('superadmin/kegiatan/index', [
+            'kegiatan' => $this->service->semua(),
+        ]);
     }
 
     public function data(int $id): ResponseInterface
     {
         $kegiatan = $this->service->cari($id);
+
         return $kegiatan
-            ? $this->json(['status' => true, 'kegiatan' => $kegiatan])
-            : $this->json(['status' => false, 'message' => 'Kegiatan tidak ditemukan.'], 404);
+            ? $this->json([
+                'status'   => true,
+                'kegiatan' => $kegiatan,
+            ])
+            : $this->json([
+                'status'  => false,
+                'message' => 'Kegiatan tidak ditemukan.',
+            ], 404);
     }
 
     public function store(): ResponseInterface
@@ -47,18 +56,34 @@ class Kegiatan extends BaseController
         }
 
         try {
-            $this->service->simpan($this->form(), $this->request->getFile('gambar'));
-            return $this->json(['status' => true, 'message' => 'Kegiatan berhasil ditambahkan.']);
+            $this->service->simpan(
+                $this->form(),
+                $this->request->getFile('gambar')
+            );
+
+            return $this->json([
+                'status'  => true,
+                'message' => 'Kegiatan berhasil ditambahkan.',
+            ]);
         } catch (Throwable $e) {
-            log_message('error', 'Simpan kegiatan: {message}', ['message' => $e->getMessage()]);
-            return $this->json(['status' => false, 'message' => $e->getMessage()], 500);
+            log_message('error', 'Simpan kegiatan: {message}', [
+                'message' => $e->getMessage(),
+            ]);
+
+            return $this->json([
+                'status'  => false,
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
 
     public function update(int $id): ResponseInterface
     {
         if (! $this->service->cari($id)) {
-            return $this->json(['status' => false, 'message' => 'Kegiatan tidak ditemukan.'], 404);
+            return $this->json([
+                'status'  => false,
+                'message' => 'Kegiatan tidak ditemukan.',
+            ], 404);
         }
 
         if (! $this->validate($this->rules(false))) {
@@ -70,11 +95,25 @@ class Kegiatan extends BaseController
         }
 
         try {
-            $this->service->perbarui($id, $this->form(), $this->request->getFile('gambar'));
-            return $this->json(['status' => true, 'message' => 'Kegiatan berhasil diperbarui.']);
+            $this->service->perbarui(
+                $id,
+                $this->form(),
+                $this->request->getFile('gambar')
+            );
+
+            return $this->json([
+                'status'  => true,
+                'message' => 'Kegiatan berhasil diperbarui.',
+            ]);
         } catch (Throwable $e) {
-            log_message('error', 'Update kegiatan: {message}', ['message' => $e->getMessage()]);
-            return $this->json(['status' => false, 'message' => $e->getMessage()], 500);
+            log_message('error', 'Update kegiatan: {message}', [
+                'message' => $e->getMessage(),
+            ]);
+
+            return $this->json([
+                'status'  => false,
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
 
@@ -82,20 +121,36 @@ class Kegiatan extends BaseController
     {
         try {
             $this->service->hapus($id);
-            return redirect()->to('/superadmin/kegiatan')->with('success', 'Kegiatan berhasil dihapus.');
+
+            return redirect()
+                ->to('/superadmin/kegiatan')
+                ->with('success', 'Kegiatan berhasil dihapus.');
         } catch (Throwable $e) {
-            log_message('error', 'Hapus kegiatan: {message}', ['message' => $e->getMessage()]);
-            return redirect()->to('/superadmin/kegiatan')->with('error', $e->getMessage());
+            log_message('error', 'Hapus kegiatan: {message}', [
+                'message' => $e->getMessage(),
+            ]);
+
+            return redirect()
+                ->to('/superadmin/kegiatan')
+                ->with('error', $e->getMessage());
         }
     }
 
     public function gambar(string $namaFile): ResponseInterface
     {
         $path = WRITEPATH . self::UPLOAD_DIR . basename($namaFile);
-        if (! is_file($path)) throw PageNotFoundException::forPageNotFound('Gambar kegiatan tidak ditemukan.');
+
+        if (! is_file($path)) {
+            throw PageNotFoundException::forPageNotFound(
+                'Gambar kegiatan tidak ditemukan.'
+            );
+        }
 
         $mime = mime_content_type($path);
-        if (! in_array($mime, self::SERVE_MIMES, true)) throw PageNotFoundException::forPageNotFound();
+
+        if (! in_array($mime, self::SERVE_MIMES, true)) {
+            throw PageNotFoundException::forPageNotFound();
+        }
 
         return $this->response
             ->setContentType($mime)
@@ -103,7 +158,7 @@ class Kegiatan extends BaseController
             ->setBody(file_get_contents($path));
     }
 
-    // ---------------- helpers (khusus controller ini) ----------------
+    // ================= VALIDASI =================
 
     private function rules(bool $requireImage): array
     {
@@ -117,9 +172,10 @@ class Kegiatan extends BaseController
             'kuota'              => 'required|integer|greater_than[0]',
             'batas_pendaftaran'  => 'permit_empty|valid_date[Y-m-d]',
             'jenis_biaya'        => 'required|in_list[gratis,berbayar]',
-            'biaya_pendaftaran'  => 'permit_empty|decimal|greater_than_equal_to[0]',
+            'biaya_pendaftaran'  => 'permit_empty|integer|greater_than_equal_to[0]',
             'status_pendaftaran' => 'required|in_list[dibuka,ditutup]',
             'aktif'              => 'required|in_list[0,1]',
+
             'gambar' => [
                 'label' => 'Gambar kegiatan',
                 'rules' => sprintf(
@@ -132,22 +188,27 @@ class Kegiatan extends BaseController
         ];
     }
 
+    // ================= DATA FORM =================
+
     private function form(): array
     {
-        $biaya = $this->request->getPost('jenis_biaya');
+        $jenisBiaya = $this->request->getPost('jenis_biaya');
+
+        $biaya = $this->request->getPost('biaya_pendaftaran');
+
         return [
             'judul'              => $this->request->getPost('judul'),
             'kategori'           => $this->request->getPost('kategori'),
-            'tanggal'            => $this->request->getPost('tanggal'),
-            'jam'                => $this->request->getPost('jam'),
-            'lokasi'             => $this->request->getPost('lokasi'),
-            'deskripsi'          => $this->request->getPost('deskripsi'),
-            'kuota'              => $this->request->getPost('kuota'),
-            'batas_pendaftaran'  => $this->request->getPost('batas_pendaftaran'),
-            'jenis_biaya'        => $biaya,
-            'biaya_pendaftaran'  => $biaya === 'gratis' ? 0 : $this->request->getPost('biaya_pendaftaran'),
-            'status_pendaftaran' => $this->request->getPost('status_pendaftaran'),
-            'aktif'              => $this->request->getPost('aktif'),
+            'tanggal'             => $this->request->getPost('tanggal'),
+            'jam'                 => $this->request->getPost('jam'),
+            'lokasi'              => $this->request->getPost('lokasi'),
+            'deskripsi'           => $this->request->getPost('deskripsi'),
+            'kuota'               => $this->request->getPost('kuota'),
+            'batas_pendaftaran'   => $this->request->getPost('batas_pendaftaran') ?: null,
+            'jenis_biaya'         => $jenisBiaya,
+            'biaya_pendaftaran'   => $jenisBiaya === 'gratis' ? 0 : (int) $biaya,
+            'status_pendaftaran'  => $this->request->getPost('status_pendaftaran'),
+            'aktif'               => $this->request->getPost('aktif'),
         ];
     }
 }

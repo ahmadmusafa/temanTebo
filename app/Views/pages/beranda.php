@@ -324,12 +324,6 @@
 
 
 <!-- KRITIK DAN SARAN -->
-<?php
-    $errorsKritik = session()->getFlashdata('errors_kritik') ?? [];
-    $sukses = session()->getFlashdata('kritik_sukses');
-    $gagal = session()->getFlashdata('kritik_gagal');
-?>
-
 <section class="feedback-section py-5" id="kritiksaran">
     <div class="container py-3">
         <div class="row justify-content-center">
@@ -346,21 +340,11 @@
                     </p>
                 </div>
 
-                <?php if ($sukses): ?>
-                    <div class="alert alert-success d-flex align-items-center rounded-4" role="alert">
-                        <i class="bi bi-check-circle-fill me-2"></i>
-                        <div><?= esc($sukses) ?></div>
-                    </div>
-                <?php endif; ?>
+                <!-- Pesan AJAX -->
+                <div id="kritikAlert"></div>
 
-                <?php if ($gagal): ?>
-                    <div class="alert alert-danger d-flex align-items-center rounded-4" role="alert">
-                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                        <div><?= esc($gagal) ?></div>
-                    </div>
-                <?php endif; ?>
-
-                <form action="<?= base_url('kritiksaran/kirim') ?>"
+                <form id="formKritik"
+                      action="<?= base_url('kritiksaran/kirim') ?>"
                       method="post"
                       class="feedback-card"
                       novalidate>
@@ -387,16 +371,9 @@
                                    id="kritikNama"
                                    name="nama"
                                    maxlength="100"
-                                   class="form-control <?= isset($errorsKritik['nama']) ? 'is-invalid' : '' ?>"
+                                   class="form-control"
                                    placeholder="Nama lengkap Anda"
-                                   value="<?= esc(old('nama')) ?>"
                                    required>
-
-                            <?php if (isset($errorsKritik['nama'])): ?>
-                                <div class="invalid-feedback">
-                                    <?= esc($errorsKritik['nama']) ?>
-                                </div>
-                            <?php endif; ?>
                         </div>
 
                         <div class="col-md-6">
@@ -408,15 +385,8 @@
                                    id="kritikEmail"
                                    name="email"
                                    maxlength="150"
-                                   class="form-control <?= isset($errorsKritik['email']) ? 'is-invalid' : '' ?>"
-                                   placeholder="nama@email.com"
-                                   value="<?= esc(old('email')) ?>">
-
-                            <?php if (isset($errorsKritik['email'])): ?>
-                                <div class="invalid-feedback">
-                                    <?= esc($errorsKritik['email']) ?>
-                                </div>
-                            <?php endif; ?>
+                                   class="form-control"
+                                   placeholder="nama@email.com">
                         </div>
 
                         <div class="col-12">
@@ -426,21 +396,11 @@
 
                             <select id="kritikJenis"
                                     name="jenis"
-                                    class="form-select <?= isset($errorsKritik['jenis']) ? 'is-invalid' : '' ?>"
+                                    class="form-select"
                                     required>
-                                <option value="saran" <?= old('jenis') !== 'kritik' ? 'selected' : '' ?>>
-                                    Saran
-                                </option>
-                                <option value="kritik" <?= old('jenis') === 'kritik' ? 'selected' : '' ?>>
-                                    Kritik
-                                </option>
+                                <option value="saran" selected>Saran</option>
+                                <option value="kritik">Kritik</option>
                             </select>
-
-                            <?php if (isset($errorsKritik['jenis'])): ?>
-                                <div class="invalid-feedback">
-                                    <?= esc($errorsKritik['jenis']) ?>
-                                </div>
-                            <?php endif; ?>
                         </div>
 
                         <div class="col-12">
@@ -452,15 +412,9 @@
                                       name="pesan"
                                       rows="5"
                                       maxlength="1000"
-                                      class="form-control <?= isset($errorsKritik['pesan']) ? 'is-invalid' : '' ?>"
+                                      class="form-control"
                                       placeholder="Tulis kritik atau saran Anda di sini..."
-                                      required><?= esc(old('pesan')) ?></textarea>
-
-                            <?php if (isset($errorsKritik['pesan'])): ?>
-                                <div class="invalid-feedback">
-                                    <?= esc($errorsKritik['pesan']) ?>
-                                </div>
-                            <?php endif; ?>
+                                      required></textarea>
                         </div>
 
                         <div class="col-12 text-center mt-4">
@@ -557,6 +511,7 @@
 <script src="<?= base_url('assets/js/beranda.js') ?>"></script>
 
 <script>
+    // Modal detail event
     document.addEventListener('DOMContentLoaded', function () {
         var modalEl = document.getElementById('modalEvent');
 
@@ -587,6 +542,79 @@
                 img.removeAttribute('src');
                 img.style.display = 'none';
             }
+        });
+    });
+
+
+    // Kirim kritik dan saran tanpa reload halaman
+    $(document).ready(function () {
+        $('#formKritik').on('submit', function (e) {
+            e.preventDefault();
+
+            const form = $(this);
+            const tombol = form.find('button[type="submit"]');
+            const alertBox = $('#kritikAlert');
+
+            tombol.prop('disabled', true).text('Mengirim...');
+            alertBox.empty();
+
+            form.find('.is-invalid').removeClass('is-invalid');
+            form.find('.invalid-feedback').remove();
+
+            $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                data: form.serialize(),
+                dataType: 'json',
+
+                success: function (response) {
+                    alertBox.empty().append(
+                        $('<div>')
+                            .addClass('alert alert-success rounded-4')
+                            .text(response.message)
+                    );
+
+                    form[0].reset();
+                },
+
+                error: function (xhr) {
+                    const response = xhr.responseJSON;
+
+                    alertBox.empty().append(
+                        $('<div>')
+                            .addClass('alert alert-danger rounded-4')
+                            .text(response?.message || 'Terjadi kesalahan. Silakan coba kembali.')
+                    );
+
+                    if (response?.errors) {
+                        $.each(response.errors, function (field, message) {
+                            const input = form.find('[name="' + field + '"]');
+
+                            input.addClass('is-invalid');
+
+                            input.after(
+                                $('<div>')
+                                    .addClass('invalid-feedback')
+                                    .text(message)
+                            );
+                        });
+                    }
+                },
+
+                complete: function (xhr) {
+                    const response = xhr.responseJSON;
+
+                    // Perbarui token CSRF jika token dibuat ulang oleh CI4
+                    if (response?.csrfName && response?.csrfHash) {
+                        form.find('input[name="' + response.csrfName + '"]')
+                            .val(response.csrfHash);
+                    }
+
+                    tombol.prop('disabled', false).html(
+                        'Kirim Masukan <i class="bi bi-send ms-2"></i>'
+                    );
+                }
+            });
         });
     });
 </script>

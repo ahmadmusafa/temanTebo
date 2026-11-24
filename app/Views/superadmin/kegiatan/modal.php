@@ -1,6 +1,6 @@
 
 <div class="modal fade" id="modalKegiatan" tabindex="-1" aria-labelledby="modalKegiatanTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content border-0 shadow">
 
             <!-- HEADER -->
@@ -14,7 +14,7 @@
                     </small>
                 </div>
 
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
             </div>
 
             <!-- FORM -->
@@ -150,12 +150,13 @@
                             <label class="form-label fw-semibold">
                                 Biaya Pendaftaran (Rp)
                             </label>
-                            <input type="number"
+                            <input type="text"
                                    name="biaya_pendaftaran"
                                    id="biayaPendaftaran"
                                    class="form-control"
-                                   min="0"
-                                   step="1"
+                                   inputmode="numeric"
+                                   autocomplete="off"
+                                   placeholder="Contoh: 100.000"
                                    value="0">
                         </div>
 

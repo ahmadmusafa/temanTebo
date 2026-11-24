@@ -11,6 +11,8 @@ $routes->get('tentang-kami', 'Home::tentangKami');
 $routes->get('kegiatan', 'Kegiatan::index');
 $routes->get('kegiatan/gambar/(:segment)', 'Kegiatan::gambar/$1');
 
+$routes->post('pendaftaran/simpan', 'Pendaftaran::simpan');
+
 $routes->post('kritiksaran/kirim', 'KritikSaran::kirim');
 
 // AUTH
@@ -33,12 +35,12 @@ $routes->group('superadmin', ['filter' => ['session', 'group:superadmin']], stat
     $routes->post('kegiatan/hapus/(:num)', 'Superadmin\Kegiatan::delete/$1');
 
     // Pendaftaran
-    $routes->get('pendaftaran', 'Superadmin\Pendaftaran::index');
-    $routes->get('pendaftaran/detail/(:num)', 'Superadmin\Pendaftaran::detail/$1');
-    $routes->post('pendaftaran/status/(:num)', 'Superadmin\Pendaftaran::updateStatus/$1');
-    $routes->post('pendaftaran/pembayaran/(:num)', 'Superadmin\Pendaftaran::updatePembayaran/$1');
+$routes->get('pendaftaran', 'Superadmin\Pendaftaran::index');
+$routes->post('pendaftaran/setujui/(:num)', 'Superadmin\Pendaftaran::setujui/$1');
+$routes->post('pendaftaran/tolak/(:num)', 'Superadmin\Pendaftaran::tolak/$1');
+$routes->get('pendaftaran/bukti/(:num)', 'Superadmin\Pendaftaran::bukti/$1');
 
-    // Statistik
+    // Statistik      
     $routes->get('statistik', 'Superadmin\Statistik::index');
     $routes->post('statistik/update', 'Superadmin\Statistik::update');
 

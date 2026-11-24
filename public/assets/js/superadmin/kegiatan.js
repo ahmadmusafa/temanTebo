@@ -10,9 +10,9 @@ $(function () {
 
     let modeForm = 'tambah';
 
-    // ================= FORMAT RIBUAN =================
+    // ================= FORMAT RUPIAH =================
     function formatRibuan(value) {
-        const raw = String(value ?? '').split('.')[0].replace(/\D/g, '');
+        const raw = String(value ?? '').replace(/\D/g, '');
         return raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
 
@@ -27,27 +27,35 @@ $(function () {
 
         this.value = formatRibuan(this.value);
 
-        // Kembalikan kursor berdasarkan jumlah digit sebelum posisi lama
         let count = 0;
-        let pos = 0;
+        let pos = this.value.length;
+
         for (let i = 0; i < this.value.length; i++) {
-            if (count >= digitsBefore) { pos = i; break; }
             if (/\d/.test(this.value[i])) count++;
-            pos = i + 1;
+
+            if (count >= digitsBefore) {
+                pos = i + 1;
+                break;
+            }
         }
+
         this.setSelectionRange(pos, pos);
     });
 
     // ================= RESET FORM =================
     function resetForm() {
         form[0].reset();
+
         biayaInput.removeData('last');
 
         form.attr('action', config.urlSimpan);
         modeForm = 'tambah';
 
         $('#modalKegiatanTitle').text('Tambah Kegiatan');
-        tombolSimpan.html('<i class="bi bi-save me-1"></i> Simpan Kegiatan');
+
+        tombolSimpan.html(
+            '<i class="bi bi-save me-1"></i> Simpan Kegiatan'
+        );
 
         $('#pesanValidasi').addClass('d-none');
         $('#daftarError').empty();
@@ -62,35 +70,46 @@ $(function () {
     }
 
     // ================= ATUR BIAYA =================
-    // Hanya sync tampilan — TIDAK menyentuh value
     function aturBiaya() {
         const gratis = $('#jenisBiaya').val() === 'gratis';
+
         $('#kolomBiaya').toggle(!gratis);
-        biayaInput.prop('disabled', gratis).prop('required', !gratis);
+
+        biayaInput
+            .prop('disabled', gratis)
+            .prop('required', !gratis);
     }
 
-    // Value hanya berubah saat USER ganti jenis (bukan saat populate)
     $('#jenisBiaya').on('change', function () {
         if ($(this).val() === 'gratis') {
             biayaInput.data('last', biayaInput.val());
             biayaInput.val('0');
         } else {
             const last = biayaInput.data('last');
-            if (last !== undefined && last !== '') biayaInput.val(last);
+
+            biayaInput.val(
+                last !== undefined && last !== ''
+                    ? last
+                    : ''
+            );
         }
+
         aturBiaya();
     });
 
     // ================= PREVIEW GAMBAR =================
     $('#gambarKegiatan').on('change', function () {
         const file = this.files[0];
+
         if (!file) return;
 
         const reader = new FileReader();
+
         reader.onload = function (event) {
             $('#previewGambar img').attr('src', event.target.result);
             $('#previewGambar').removeClass('d-none');
         };
+
         reader.readAsDataURL(file);
     });
 
@@ -105,10 +124,14 @@ $(function () {
         const id = $(this).data('id');
 
         resetForm();
+
         modeForm = 'edit';
 
         $('#modalKegiatanTitle').text('Edit Kegiatan');
-        tombolSimpan.html('<i class="bi bi-save me-1"></i> Simpan Perubahan');
+
+        tombolSimpan.html(
+            '<i class="bi bi-save me-1"></i> Simpan Perubahan'
+        );
 
         $('#gambarKegiatan').prop('required', false);
         $('#wajibGambar').addClass('d-none');
@@ -120,7 +143,10 @@ $(function () {
 
             success: function (response) {
                 if (!response.status) {
-                    tampilkanPesan(response.message || 'Data tidak ditemukan.', 'danger');
+                    tampilkanPesan(
+                        response.message || 'Data tidak ditemukan.',
+                        'danger'
+                    );
                     return;
                 }
 
@@ -128,16 +154,18 @@ $(function () {
 
                 $.each(kegiatan, function (key, value) {
                     const field = form.find('[name="' + key + '"]');
+
                     if (!field.length || key === 'gambar') return;
 
-                    field.val(
-                        key === 'biaya_pendaftaran'
-                            ? formatRibuan(parseInt(value, 10) || 0)
-                            : (value ?? '')
-                    );
+                    if (key === 'biaya_pendaftaran') {
+                        field.val(formatRibuan(value));
+                    } else {
+                        field.val(value ?? '');
+                    }
                 });
 
                 form.attr('action', config.urlUpdate + '/' + id);
+
                 aturBiaya();
 
                 if (kegiatan.gambar) {
@@ -145,6 +173,7 @@ $(function () {
                         'src',
                         config.urlGambar + encodeURIComponent(kegiatan.gambar)
                     );
+
                     $('#previewGambar').removeClass('d-none');
                 }
 
@@ -153,7 +182,8 @@ $(function () {
 
             error: function (xhr) {
                 tampilkanPesan(
-                    xhr.responseJSON?.message || 'Gagal mengambil data kegiatan.',
+                    xhr.responseJSON?.message ||
+                    'Gagal mengambil data kegiatan.',
                     'danger'
                 );
             }
@@ -163,9 +193,13 @@ $(function () {
     // ================= VALIDASI =================
     function tampilkanError(errors) {
         $('#daftarError').empty();
+
         $.each(errors, function (field, message) {
-            $('#daftarError').append($('<li>').text(message));
+            $('#daftarError').append(
+                $('<li>').text(message)
+            );
         });
+
         $('#pesanValidasi').removeClass('d-none');
     }
 
@@ -177,7 +211,9 @@ $(function () {
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         `);
+
         alert.find('span').text(pesan);
+
         $('#notifikasiKegiatan').empty().append(alert);
     }
 
@@ -192,11 +228,14 @@ $(function () {
 
         const formData = new FormData(this);
 
-        // Kirim angka murni — titik ribuan hanya tampilan
+        // Kirim nominal angka murni ke controller
         if ($('#jenisBiaya').val() === 'gratis') {
             formData.set('biaya_pendaftaran', '0');
         } else {
-            formData.set('biaya_pendaftaran', cleanRibuan(biayaInput.val()));
+            formData.set(
+                'biaya_pendaftaran',
+                cleanRibuan(biayaInput.val())
+            );
         }
 
         $('#pesanValidasi').addClass('d-none');
@@ -225,23 +264,26 @@ $(function () {
                 }
 
                 modal.hide();
+
                 $('#daftarKegiatan').load(
                     window.location.href + ' #daftarKegiatan > *',
                     function () {
                         tampilkanPesan(response.message, 'success');
                     }
                 );
-                resetForm();
             },
 
             error: function (xhr) {
                 const response = xhr.responseJSON;
+
                 if (response?.errors) {
                     tampilkanError(response.errors);
                     return;
                 }
+
                 tampilkanPesan(
-                    response?.message || 'Terjadi kesalahan saat menyimpan kegiatan.',
+                    response?.message ||
+                    'Terjadi kesalahan saat menyimpan kegiatan.',
                     'danger'
                 );
             },
@@ -260,4 +302,7 @@ $(function () {
     modalElement.addEventListener('hidden.bs.modal', function () {
         resetForm();
     });
+
+    // ================= INISIALISASI =================
+    aturBiaya();
 });

@@ -89,7 +89,7 @@
                     <p class="text-secondary small">
                         Kelola informasi kegiatan dan pendaftaran relawan.
                     </p>
-                    <span class="badge text-bg-secondary">Belum tersedia</span>
+                    <span class="badge text-bg-success">Tersedia</span>
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
                     <p class="text-secondary small">
                         Lihat masukan dari pengguna TemanTebo.
                     </p>
-                    <span class="badge text-bg-secondary">Belum tersedia</span>
+                    <span class="badge text-bg-success">Tersedia</span>
                 </div>
             </div>
         </div>

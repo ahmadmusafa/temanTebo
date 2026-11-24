@@ -1,0 +1,38 @@
+
+.text-brand {
+    color: #f97316;
+}
+
+.bg-brand {
+    background-color: #f97316;
+}
+
+.btn-brand {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #f97316;
+    --bs-btn-border-color: #f97316;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #ea580c;
+    --bs-btn-hover-border-color: #ea580c;
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #f97316;
+    --bs-btn-disabled-border-color: #f97316;
+}
+
+.btn-outline-brand {
+    --bs-btn-color: #f97316;
+    --bs-btn-border-color: #f97316;
+    --bs-btn-border-width: 2px;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #f97316;
+    --bs-btn-hover-border-color: #f97316;
+}
+
+.event-card {
+    cursor: pointer;
+}
+
+.event-img {
+    height: 210px;
+    object-fit: cover;
+}
